@@ -1,0 +1,16 @@
+nav.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light.bottom-shadow
+  b= link_to 'Tweeter', tweets_path, class: "navbar-brand"
+  button.navbar-toggler aria-controls="navbarText" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarText" data-toggle="collapse" type="button"
+    span.navbar-toggler-icon
+  #navbarText.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item
+        = link_to 'Home', tweets_path, class: "nav-link"
+      li.nav-item
+        = link_to 'Users', users_path, class: "nav-link"
+      li.nav-item
+        = link_to 'Hashtags', tags_path, class: "nav-link"
+      li.nav-item
+        = link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link"
+    span.navbar-text
+      | Welcome, @#{current_user.username}!

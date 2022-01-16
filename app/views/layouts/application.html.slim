@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Atoz
+    meta content="width=device-width,initial-scale=1" name="viewport" /
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    / - if current_user
+    /   = render partial: 'shared/navbar'
+    .navbar
+      .container
+        .navlink = link_to 'Home', products_path
+        / - unless user_signed_in?
+        /   .navlink = link_to 'Login', new_user_session_path
+        - if admin_signed_in?
+          h4 Admin
+          .navlink = link_to 'Products', admin_products_path
+    - flash.each do |name, msg|
+       = content_tag :div, msg, class: name
+    = yield
