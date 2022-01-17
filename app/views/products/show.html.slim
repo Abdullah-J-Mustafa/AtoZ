@@ -4,5 +4,8 @@ h1.jumbotron #{ @product.name.capitalize }
     .card-body
       p = @product.description
       p <small> SGD </small> #{ @product.price }
+      - if @product.images.attached?
+        - @product.images.each do |image|
+          = image_tag(image, :class => "images")
     .card-footer
       = link_to 'Back to Product List', products_path

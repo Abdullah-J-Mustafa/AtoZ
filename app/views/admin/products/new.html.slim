@@ -1,10 +1,11 @@
 h1.jumbotron Add New Product
 
 .container
-  = simple_form_for [:admin, @product], class: "form-horizontal" do |f|
+  = simple_form_for [:admin, @product], html: { multipart: true }, class: "form-horizontal" do |f|
     = f.input :name
     = f.input :description
     = f.input :price
+    = f.input :images, as: :file, label: 'Upload File', required: true
 
     / = f.association :categories, collection: Category.all, as: :check_boxes, include_hidden: false
 
