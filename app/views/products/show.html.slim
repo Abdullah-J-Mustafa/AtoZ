@@ -6,6 +6,7 @@ h1.jumbotron #{ @product.name.capitalize }
       p <small> SGD </small> #{ @product.price }
       - if @product.images.attached?
         - @product.images.each do |image|
-          = image_tag(image, :class => "images")
+          = image_tag(image, class: 'images')
+      = link_to 'Add to Cart', add_to_cart_path(@product), method: :put
     .card-footer
       = link_to 'Back to Product List', products_path

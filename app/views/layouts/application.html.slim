@@ -14,11 +14,17 @@ html
     .navbar
       .container
         .navlink = link_to 'Home', products_path
-        / - unless user_signed_in?
-        /   .navlink = link_to 'Login', new_user_session_path
+        - unless user_signed_in?
+          .navlink = link_to 'Login', new_user_session_path
+        - if user_signed_in?
+          .navlink = link_to 'Cart (' + "#{current_user.cart_count}" + ')', cart_path
+          .navlink = link_to 'Logout', destroy_user_session_path
         - if admin_signed_in?
           h4 Admin
           .navlink = link_to 'Products', admin_products_path
+        - if user_signed_in? || admin_signed_in?
+          span.navbar-text
+            | Welcome, #{current_user&.email}!
     - flash.each do |name, msg|
        = content_tag :div, msg, class: name
     = yield
